@@ -90,6 +90,16 @@ public class Order extends Record {
         payments.add(payment);
     }
 
+    public Attendee getAttendeeById(Integer id) {
+        assert id != null;
+        for (Attendee attendee : attendeeList) {
+            if (attendee.getId().equals(id)) {
+                return attendee;
+            }
+        }
+        throw new RuntimeException("Error: attendee " + id + " not found in order " + orderId);
+    }
+
     public void removePayment(Payment payment) {
         payments.remove(payment);
         if (getTotalPaid().compareTo(getTotalAmount()) >= 0) {

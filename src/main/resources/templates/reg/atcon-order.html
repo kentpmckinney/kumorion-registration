@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/base}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <title>Order</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div class="col-sm-12">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-8">
+
+            <table class="table table-bordered table-striped table-sm">
+                <tbody>
+                <tr>
+                    <td>Order ID</td>
+                    <td th:text="${order.id}">12</td>
+                </tr>
+
+                <tr>
+                    <td>Attendees</td>
+                    <td>
+                        <table class="table table-borderless table-condensed table-hover">
+                            <tr th:if="${order.attendeeList.empty}">
+                                <td colspan="3"> No Attendees Found </td>
+                            </tr>
+                            <tr th:each="a : ${order.attendeeList}">
+                                <td th:text="${a.firstName} + ' ' + ${a.lastName}">Attendee Name</td>
+                                <td th:text="${a.badge?.badgeType}">Weekend</td>
+                                <td><a class="btn btn-secondary btn-sm" th:href="'/reg/atconorder/' + ${order.id} + '/attendee/' + ${a.id}" href="#">Edit</a></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Payments</td>
+                    <td>
+                        <table class="table table-borderless table-condensed table-hover">
+                            <tr th:if="${order.payments.empty}">
+                                <td colspan="2"> No Payments Found </td>
+                            </tr>
+                            <tr th:each="p : ${order.payments}">
+                                <td th:text="${p.paymentType}">Cash</td>
+                                <td class="text-right" th:text="'$' + ${p.amount}"></td>
+                                <td><a class="btn btn-secondary btn-sm" th:href="'/reg/atconorder/' + ${order.id} + '/attendee/' + ${a.id}" href="#">Edit</a></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-primary mb-2" th:href="'/reg/atconorder/' + ${order.id} + '/attendee/new'">Add Attendee</a>
+            <a class="btn btn-primary mb-2">Take Payment</a>
+            <a class="btn btn-secondary disabled mb-2">Order Complete</a>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

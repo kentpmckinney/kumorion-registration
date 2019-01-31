@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/base}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <title>Edit Attendee</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div class="col-10">
+
+            <form action="#" th:object="${attendee}" th:if="${attendee!=null}" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <ul th:if="${#fields.hasErrors('*')}">
+                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+                </ul>
+                <input type="hidden" th:field="*{id}" />
+
+                <div class="form-group row">
+                    <label for="inputFirstName" class="col-sm-2 col-form-label">First Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{firstName}" th:errorclass="is-invalid" class="form-control" id="inputFirstName" placeholder="First Name" autofocus>
+                    </div>
+                    <label for="inputLastName" class="col-sm-2 col-form-label">Last Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{lastName}" th:errorclass="is-invalid" class="form-control" id="inputLastName" placeholder="Last Name" autofocus>
+                    </div>
+
+                </div>
+
+
+                <p>
+                    <input class="btn btn-danger" type="submit" name="action" value="Delete" />
+                    <input class="btn btn-secondary" type="reset" value="Reset" />
+                    <a th:href="'/reg/atconorder/' + ${order.id}" class="btn btn-secondary">Cancel</a>
+                    <input class="btn btn-primary" name="action" type="submit" value="Save" />
+                </p>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
