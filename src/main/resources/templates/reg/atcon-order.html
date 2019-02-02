@@ -32,7 +32,7 @@
                             </tr>
                             <tr th:each="a : ${order.attendeeList}">
                                 <td th:text="${a.firstName} + ' ' + ${a.lastName}">Attendee Name</td>
-                                <td th:text="${a.badge?.badgeType}">Weekend</td>
+                                <td th:text="${a.badge?.name}">Weekend</td>
                                 <td><a class="btn btn-secondary btn-sm" th:href="'/reg/atconorder/' + ${order.id} + '/attendee/' + ${a.id}" href="#">Edit</a></td>
                             </tr>
                         </table>
@@ -49,7 +49,7 @@
                             <tr th:each="p : ${order.payments}">
                                 <td th:text="${p.paymentType}">Cash</td>
                                 <td class="text-right" th:text="'$' + ${p.amount}"></td>
-                                <td><a class="btn btn-secondary btn-sm" th:href="'/reg/atconorder/' + ${order.id} + '/attendee/' + ${a.id}" href="#">Edit</a></td>
+                                <td><a class="btn btn-secondary btn-sm" th:href="'/reg/atconorder/' + ${order.id} + '/payment/' + ${p.id}" href="#">Edit</a></td>
                             </tr>
                         </table>
                     </td>

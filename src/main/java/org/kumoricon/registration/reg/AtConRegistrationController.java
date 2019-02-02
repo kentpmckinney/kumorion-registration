@@ -2,6 +2,7 @@ package org.kumoricon.registration.reg;
 
 import org.kumoricon.registration.model.attendee.Attendee;
 import org.kumoricon.registration.model.attendee.AttendeeRepository;
+import org.kumoricon.registration.model.badge.BadgeRepository;
 import org.kumoricon.registration.model.order.Order;
 import org.kumoricon.registration.model.order.OrderRepository;
 import org.kumoricon.registration.model.user.User;
@@ -11,7 +12,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -26,12 +26,14 @@ public class AtConRegistrationController {
     private final AttendeeRepository attendeeRepository;
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
+    private final BadgeRepository badgeRepository;
 
     @Autowired
-    public AtConRegistrationController(AttendeeRepository attendeeRepository, OrderRepository orderRepository, UserRepository userRepository) {
+    public AtConRegistrationController(AttendeeRepository attendeeRepository, OrderRepository orderRepository, UserRepository userRepository, BadgeRepository badgeRepository) {
         this.attendeeRepository = attendeeRepository;
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
+        this.badgeRepository = badgeRepository;
     }
 
     @RequestMapping(value = "/reg/atconorder/{orderId}/attendee/{attendeeId}")
@@ -61,6 +63,7 @@ public class AtConRegistrationController {
 
         model.addAttribute("order", order);
         model.addAttribute("attendee", attendee);
+        model.addAttribute("badgelist", badgeRepository.findByVisibleTrue());
         model.addAttribute("msg", msg);
         model.addAttribute("err", err);
         return "reg/atcon-order-attendee";
@@ -79,6 +82,7 @@ public class AtConRegistrationController {
         Order order = orderRepository.getOne(getIdFromParamter(orderId));
         model.addAttribute("order", order);
         model.addAttribute("attendee", attendee);
+        model.addAttribute("badgelist", badgeRepository.findByVisibleTrue());
         model.addAttribute("msg", msg);
         model.addAttribute("err", err);
 

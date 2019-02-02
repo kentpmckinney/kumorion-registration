@@ -92,7 +92,7 @@
 
                 <div class="form-group row">
                     <select name="badge" class="form-control-sm" id="inputRole" th:errorclass="is-invalid">
-                        <option th:each="b : ${badges}" th:value="${b.id}" th:text="${b.name}" th:selected="${b.id==attende.badge?.id}"></option>
+                        <option th:each="b : ${badgelist}" th:value="${b.id}" th:text="${b.name}" th:selected="${b.id==attendee.badge?.id}"></option>
                     </select>
                 </div>
 
