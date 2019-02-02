@@ -18,20 +18,86 @@
                 <input type="hidden" th:field="*{id}" />
 
                 <div class="form-group row">
-                    <label for="inputFirstName" class="col-sm-2 col-form-label">First Name</label>
+                    <label for="inputFirstName" class="col-sm-2 col-form-label-sm">First Name</label>
                     <div class="col-sm-4">
-                        <input type="text" th:field="*{firstName}" th:errorclass="is-invalid" class="form-control" id="inputFirstName" placeholder="First Name" autofocus>
+                        <input type="text" th:field="*{firstName}" th:errorclass="is-invalid" class="form-control-sm" id="inputFirstName" placeholder="First Name" autofocus>
                     </div>
-                    <label for="inputLastName" class="col-sm-2 col-form-label">Last Name</label>
+                    <label for="inputLastName" class="col-sm-2 col-form-label-sm">Last Name</label>
                     <div class="col-sm-4">
-                        <input type="text" th:field="*{lastName}" th:errorclass="is-invalid" class="form-control" id="inputLastName" placeholder="Last Name" autofocus>
+                        <input type="text" th:field="*{lastName}" th:errorclass="is-invalid" class="form-control-sm" id="inputLastName" placeholder="Last Name">
                     </div>
-
                 </div>
 
+                <div class="form-group row">
+                    <input type="checkbox" th:field="*{nameIsLegalName}" th:errorclass="is-invalid" class="form-control-sm" id="inputNameIsLegalName">
+                    <label for="inputLegalFirstName" class="col-sm-2 col-form-label-sm">Legal First Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{legalFirstName}" th:errorclass="is-invalid" class="form-control-sm" id="inputLegalFirstName" placeholder="First Name">
+                    </div>
+                    <label for="inputLegalLastName" class="col-sm-2 col-form-label-sm">Legal Last Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{legalLastName}" th:errorclass="is-invalid" class="form-control-sm" id="inputLegalLastName" placeholder="Last Name">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputFanName" class="col-sm-2 col-form-label-sm">Fan Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{fanName}" th:errorclass="is-invalid" class="form-control-sm" id="inputFanName" placeholder="Fan Name">
+                    </div>
+                    <label for="inputBirthDate" class="col-sm-2 col-form-label-sm">Date of Birth</label>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{birthDate}" th:errorclass="is-invalid" class="form-control-sm" id="inputBirthDate" placeholder="MM/DD/YYYY">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputPhone" class="col-sm-2 col-form-label-sm">Phone Number</label>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{phoneNumber}" th:errorclass="is-invalid" class="form-control-sm" id="inputPhone" placeholder="000-000-0000">
+                    </div>
+                    <label for="inputEmail" class="col-sm-2 col-form-label-sm">Email</label>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{email}" th:errorclass="is-invalid" class="form-control-sm" id="inputEmail" placeholder="user@example.com">
+                    </div>
+                    <label for="inputZip" class="col-sm-2 col-form-label-sm">Zip Code</label>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{zip}" th:errorclass="is-invalid" class="form-control-sm" id="inputZip" placeholder="00000">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputEmergencyContactName" class="col-sm-2 col-form-label-sm">Emergency Contact Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{emergencyContactFullName}" th:errorclass="is-invalid" class="form-control-sm" id="inputEmergencyContactName" placeholder="Jane Doe">
+                    </div>
+                    <label for="inputEmergencyContactPhone" class="col-sm-2 col-form-label-sm">Emergency Contact Phone</label>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{emergencyContactPhone}" th:errorclass="is-invalid" class="form-control-sm" id="inputEmergencyContactPhone" placeholder="000-000-0000">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <input type="checkbox" th:field="*{nameIsLegalName}" th:errorclass="is-invalid" class="form-control-sm" id="inputParentIsEmergencyContact">
+                    <label for="inputParentFullName" class="col-sm-2 col-form-label-sm">Parent Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{parentFullName}" th:errorclass="is-invalid" class="form-control-sm" id="inputParentFullName" placeholder="John Doe">
+                    </div>
+                    <label for="inputParentPhone" class="col-sm-2 col-form-label-sm">Emergency Contact Phone</label>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{parentPhone}" th:errorclass="is-invalid" class="form-control-sm" id="inputParentPhone" placeholder="000-000-0000">
+                    </div>
+                    <input type="checkbox" th:field="*{parentFormReceived}" th:errorclass="is-invalid" class="form-control-sm" id="inputParentFormReceived">
+                </div>
+
+                <div class="form-group row">
+                    <select name="badge" class="form-control-sm" id="inputRole" th:errorclass="is-invalid">
+                        <option th:each="b : ${badges}" th:value="${b.id}" th:text="${b.name}" th:selected="${b.id==attende.badge?.id}"></option>
+                    </select>
+                </div>
 
                 <p>
-                    <input class="btn btn-danger" type="submit" name="action" value="Delete" />
+                    <input class="btn btn-danger" th:if="${attendee.id != null}" type="submit" name="action" value="Delete" />
                     <input class="btn btn-secondary" type="reset" value="Reset" />
                     <a th:href="'/reg/atconorder/' + ${order.id}" class="btn btn-secondary">Cancel</a>
                     <input class="btn btn-primary" name="action" type="submit" value="Save" />

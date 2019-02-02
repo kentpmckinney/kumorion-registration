@@ -76,20 +76,20 @@ public class AtConRegistrationController {
                                 @RequestParam(required = false) String err,
                                 @RequestParam(required=false) String msg) {
 
-        if (bindingResult.hasErrors()) {
-            return "reg/atcon-order-attendee";
-        }
-
-
         Order order = orderRepository.getOne(getIdFromParamter(orderId));
-        order.addAttendee(attendee);
-        attendee.setOrder(order);
-        orderRepository.save(order);
-
         model.addAttribute("order", order);
         model.addAttribute("attendee", attendee);
         model.addAttribute("msg", msg);
         model.addAttribute("err", err);
+
+        if (bindingResult.hasErrors()) {
+            return "reg/atcon-order-attendee";
+        }
+
+        order.addAttendee(attendee);
+        attendee.setOrder(order);
+        orderRepository.save(order);
+
         return "redirect:/reg/atconorder/" + order.getId() + "?msg=Added+" + attendee.getFirstName();
     }
 
