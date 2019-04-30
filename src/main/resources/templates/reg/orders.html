@@ -32,10 +32,10 @@
                     <td colspan="4"> No Orders Found </td>
                 </tr>
                 <tr th:each="order : ${orders}">
-                    <td><a th:href="'/orders/' + ${order.id}" th:text="${order.orderId}">c4ca4238a0b923820dcc509a6f75849b</a></td>
-                    <td th:text="${order.orderTakenByUser}">admin</td>
-                    <td class="text-right" th:text="'$' + ${order.getTotalAmount()}">$60.00</td>
-                    <td th:text="${order.paid}">True</td>
+                    <td><a th:href="'/orders/' + ${order.id}" th:text="${order.id}"></a></td>
+                    <td th:text="${order.orderTakenByUser}"></td>
+                    <td class="text-right" th:text="'$' + ${order.getTotalAmount()}"></td>
+                    <td th:text="${order.paid}"></td>
                     <td></td>
                 </tr>
                 </tbody>

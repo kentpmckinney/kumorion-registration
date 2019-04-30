@@ -28,6 +28,7 @@ public class OrderRepository {
     public Order findById(Integer id) {
         try {
             return jdbcTemplate.queryForObject(
+                    //"select orders.id, orders.notes, orders.order_id, users.username as order_taken_by_user, orders.paid from orders join users on orders.order_taken_by_user=users.id where orders.id=?",
                     "select * from orders where id=?",
                     new Object[]{id}, new OrderRowMapper());
         } catch (EmptyResultDataAccessException e) {

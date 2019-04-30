@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/base}" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <title>Order</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <table class="table table-bordered table-striped table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th class="text-nowrap">Order ID</th>
+                <th class="text-nowrap">Taken By</th>
+                <th class="text-nowrap">Total Amount</th>
+                <th class="text-nowrap">Paid</th>
+                <th class="text-nowrap">Notes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${order.empty}">
+                <td colspan="4"> No Orders Found </td>
+            </tr>
+            <tr>
+                <td th:text="${order.id}"></td>
+                <td th:text="${order.orderTakenByUser}"></td>
+                <td class="text-right" th:text="'$' + ${order.getTotalAmount()}"></td>
+                <td th:text="${order.paid}"></td>
+                <td th:text="${order.notes}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>

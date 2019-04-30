@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -50,5 +51,23 @@ public class OrderController {
         model.addAttribute("nextPage", nextPage);
         model.addAttribute("prevPage", prevPage);
         return "reg/orders";
+    }
+
+    @RequestMapping(value = "/orders/{orderId}")
+    @PreAuthorize("hasAuthority('manage_orders')")
+    public String listOrdersById(Model model, @PathVariable String orderId) {
+        Order order = orderRepository.findById(getIdFromParameter(orderId));
+        model.addAttribute("order", order);
+        model.addAttribute("attendees", attendeeRepository.findAllByOrderId(getIdFromParameter(orderId)));
+        model.addAttribute("payments", paymentRepository.findByOrderId(getIdFromParameter(orderId)));
+        return "reg/orders-by-id";
+    }
+
+    private Integer getIdFromParameter(String parameter) {
+        try {
+            return Integer.parseInt(parameter);
+        } catch (NumberFormatException ex) {
+            throw new RuntimeException("Bad parameter: " + parameter + " is not an integer");
+        }
     }
 }
